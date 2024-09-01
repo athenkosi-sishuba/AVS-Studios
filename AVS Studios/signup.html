@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles\sign up_styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <title>AVS Studios</title> 
+</head>
+<body>
+    <nav>
+        <ul class="nav__links">
+          <li class="link"><a href="signup.html">SIGN UP</a></li>
+          <li class="link"><a href="Projects.html">PROJECTS</a></li>
+          <li class="nav__logo">
+            <a href="index.html"><img src="assets/avslogo.png" alt="logo" /></a>
+            <h4>AVS Studios</h4>
+           <p>LTD PTY</p>
+          </li>
+          <li class="link"><a href="services.html">SERVICES</a></li>
+          <li class="link"><a href="contact.html">CONTACT</a></li>
+        </ul>
+      </nav>
+    <div class="container">
+        <img  class="formlogo"height= 260x width=340px  src="assets\logo3.png">
+        <h4>SIGN-UP</h4>
+        <form id="signup-form" action="#" method="post">
+            <div class="form-group">
+                <label for="full-name">Full Name:</label>
+                <input type="text" id="full-name" name="full-name" required>
+                <div class="error-message" id="full-name-error"></div>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <div class="error-message" id="email-error"></div>
+            </div>
+            <div class="form-group">
+                <label for="retype-email">Retype Email:</label>
+                <input type="email" id="retype-email" name="retype-email" required>
+                <div class="error-message" id="retype-email-error"></div>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <div class="error-message" id="password-error"></div>
+            </div>
+            <div class="form-group">
+                <label for="retype-password">Retype Password:</label>
+                <input type="password" id="retype-password" name="retype-password" required>
+                <div class="error-message" id="retype-password-error"></div>
+            </div>
+            <div class="form-group">
+              
+			  <label> By signing up for this account you agree to our <i>Terms of service</i>  and <i>Privacy policy</i></label>
+              <input type="checkbox" id="terms" name="terms" required>
+                <div class="error-message" id="terms-error"></div>
+            </div>
+            <input type="submit" value="Setup account">
+            <button><a href="Index.html">Return to home </a> </button>
+        </form>
+    </div>
+
+    <script>
+ 
+        document.getElementById("signup-form").addEventListener("submit", function(event) {
+            let valid = true;
+            const fullName = document.getElementById("full-name").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const retypeEmail = document.getElementById("retype-email").value.trim();
+            const password = document.getElementById("password").value.trim();
+            const retypePassword = document.getElementById("retype-password").value.trim();
+            const terms = document.getElementById("terms").checked;
+            
+            const fullNameError = document.getElementById("full-name-error");
+            const emailError = document.getElementById("email-error");
+            const retypeEmailError = document.getElementById("retype-email-error");
+            const passwordError = document.getElementById("password-error");
+            const retypePasswordError = document.getElementById("retype-password-error");
+            const termsError = document.getElementById("terms-error");
+
+            // Reset error messages
+            fullNameError.innerHTML = "";
+            emailError.innerHTML = "";
+            retypeEmailError.innerHTML = "";
+            passwordError.innerHTML = "";
+            retypePasswordError.innerHTML = "";
+            termsError.innerHTML = "";
+
+            // Validation rules
+            if (fullName === "") {
+                fullNameError.innerHTML = "Full Name is required";
+                valid = false;
+            }
+
+            if (email === "") {
+                emailError.innerHTML = "Email is required";
+                valid = false;
+            } else if (!isValidEmail(email)) {
+                emailError.innerHTML = "Invalid email format";
+                valid = false;
+            }
+
+            if (retypeEmail === "") {
+                retypeEmailError.innerHTML = "Retype Email is required";
+                valid = false;
+            } else if (email !== retypeEmail) {
+                retypeEmailError.innerHTML = "Emails do not match";
+                valid = false;
+            }
+
+            if (password === "") {
+                passwordError.innerHTML = "Password is required";
+                valid = false;
+            }
+
+            if (retypePassword === "") {
+                retypePasswordError.innerHTML = "Retype Password is required";
+                valid = false;
+            } else if (password !== retypePassword) {
+                retypePasswordError.innerHTML = "Passwords do not match";
+                valid = false;
+            }
+
+            if (!terms) {
+                termsError.innerHTML = "You must agree to the Terms and Conditions";
+                valid = false;
+            }
+
+            if (!valid) {
+                event.preventDefault(); // Prevent form submission if validation fails
+            }
+        });
+
+        // Function to validate email format
+        function isValidEmail(email) {
+            const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+            return emailRegex.test(email);
+        }
+    </script>
+</body>
+</html>
